@@ -1,28 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <caixas :caixinhas="caixinhas"/>
+    <ferramentas :caixinhas="caixinhas" @alteraCor="alteraCor($event)" @alterarTexto="alterarTexto($event)"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Caixas from "./components/Caixas.vue";
+import Ferramentas from "./components/Ferramentas.vue"
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Caixas, 
+    Ferramentas
+  },
+  data: function() {
+    return {};
+  },
+  methods: {
+    alteraCor: function(cor) {
+      this.$emit("alteraCor", {
+        cor: cor,
+        caixa: this.caixaSel
+      });
+    },
+    alterarTexto: function() {
+      this.$emit("alterarTexto", {
+        titulo: this.titulo,
+        caixa: this.caixaSel
+      });
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
